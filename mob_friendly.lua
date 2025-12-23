@@ -61,12 +61,15 @@ local function fireInput(frame)
 
     local x = pos.X + size.X / 2
     local y = pos.Y + size.Y / 2
+    local tapPos = Vector2.new(x, y)
 
     if isMobile then
-        VirtualInputManager:SendTouchEvent(0, x, y, true, game)
-        VirtualInputManager:SendTouchEvent(0, x, y, false, game)
+        VirtualInputManager:SendTouchEvent(0, tapPos, true)
+        task.wait()
+        VirtualInputManager:SendTouchEvent(0, tapPos, false)
     else
         VirtualInputManager:SendMouseButtonEvent(x, y, 0, true, game, 0)
+        task.wait()
         VirtualInputManager:SendMouseButtonEvent(x, y, 0, false, game, 0)
     end
 end
