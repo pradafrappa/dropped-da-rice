@@ -38,6 +38,7 @@ local UserInputService = game:GetService("UserInputService")
 
 local player = Players.LocalPlayer
 local wasInside = false
+local FORCE_MOUSE = true
 local isMobile = UserInputService.TouchEnabled
 
 local function centerInside(mover, frame)
@@ -63,7 +64,7 @@ local function fireInput(frame)
     local y = pos.Y + size.Y / 2
     local tapPos = Vector2.new(x, y)
 
-    if isMobile then
+    if isMobile and not FORCE_MOUSE then
         VirtualInputManager:SendTouchEvent(0, tapPos, true)
         task.wait()
         VirtualInputManager:SendTouchEvent(0, tapPos, false)
